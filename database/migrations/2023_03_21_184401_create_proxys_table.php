@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('account_fb', function (Blueprint $table) {
+        Schema::create('proxys', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('fb_id')->unique();
-            $table->string('name');
-            $table->string('email')->nullable()->unique();
-            $table->integer('phone')->nullable();
-            $table->string('password');
-            $table->text('cookie')->nullable();
-            $table->text('token')->nullable();
+            $table->string('domain');
+            $table->string('port');
+            $table->string('username')->nullable();
+            $table->string('password')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('type', ['http', 'https', 'socks4', 'socks5'])->default('http');
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('account_fb');
+        Schema::dropIfExists('proxys');
     }
 };

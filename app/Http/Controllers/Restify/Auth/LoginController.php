@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Restify\Auth;
 
 use Illuminate\Http\JsonResponse;
@@ -18,19 +19,24 @@ class LoginController extends Controller
 
         /** * @var User $user */
 
-        if (! $user = config('restify.auth.user_model')::query()
+        if (!$user = config('restify.auth.user_model')::query()
             ->whereEmail($request->input('email'))
             ->first()) {
             abort(401, 'Invalid credentials.');
         }
 
-        if (! Hash::check($request->input('password'), $user->password)) {
+        if (!Hash::check($request->input('password'), $user->password)) {
             abort(401, 'Invalid credentials.');
         }
         $user = User::find($user->id);
         return data([
             'userData' => $user,
-            'userAbilities'=> 'admin',
+            'ability' => [
+                [
+                    'action' => 'manage',
+                    'subject' => 'all',
+                ]
+            ],
             'accessToken' => $user->createToken('login'),
         ]);
     }

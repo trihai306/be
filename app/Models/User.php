@@ -20,6 +20,16 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'first_name',
+        'last_name',
+        'phone',
+        'address',
+        'state',
+        'country',
+        'avatar',
+        'points',
+        'role',
+        'status',
         'password',
     ];
 
@@ -41,4 +51,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function accountfb()
+    {
+        return $this->hasMany(AccountFB::class);
+    }
+    public function proxy()
+    {
+        return $this->hasMany(Proxy::class);
+    }
 }

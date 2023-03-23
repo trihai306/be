@@ -27,6 +27,7 @@ return new class extends Migration {
             $table->bigInteger('points')->default(0);
             $table->enum('role', ['admin', 'user'])->default('user');
             $table->string('password');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->rememberToken();
             $table->timestamps();
         });
