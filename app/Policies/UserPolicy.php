@@ -21,31 +21,31 @@ class UserPolicy
 
     public function store(User $user): bool
     {
-        return false;
+        return true;
     }
 
     public function storeBulk(User $user): bool
     {
-        return false;
+        return true;
     }
 
     public function update(User $user, User $model): bool
     {
-        return false;
+        return true;
     }
 
     public function updateBulk(User $user, User $model): bool
     {
-        return false;
+        return true;
     }
 
     public function deleteBulk(User $user, User $model): bool
     {
-        return false;
+        return true;
     }
 
     public function delete(User $user, User $model): bool
     {
-        return false;
+        return true;
     }
 }

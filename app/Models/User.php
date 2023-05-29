@@ -28,8 +28,6 @@ class User extends Authenticatable
         'country',
         'avatar',
         'points',
-        'role',
-        'status',
         'password',
     ];
 
