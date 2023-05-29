@@ -13,6 +13,16 @@ class RegisterController extends Controller
 {
     public function __invoke(Request $request): JsonResponse
     {
+        // Thêm thông báo lỗi tiếng Việt cho việc xác thực nhập liệu
+        $messages = [
+            'email.required' => 'Vui lòng nhập địa chỉ email.',
+            'email.email' => 'Địa chỉ email không hợp lệ.',
+            'email.max' => 'Địa chỉ email không được quá 255 ký tự.',
+            'email.unique' => 'Địa chỉ email đã được sử dụng.',
+            'password.required' => 'Vui lòng nhập mật khẩu.',
+            'name.required' => 'Vui lòng nhập tên.',
+        ];
+
         $validatedData = $request->validate([
             'email' => ['required', 'email', 'max:255', 'unique:' . Config::get('restify.auth.table', 'users')],
             'password' => ['required'],
@@ -23,7 +33,7 @@ class RegisterController extends Controller
             'address' => ['nullable'],
             'state' => ['nullable'],
             'country' => ['nullable'],
-        ]);
+        ], $messages);
 
         $user = User::forceCreate([
             'name' => $validatedData['name'],
@@ -37,10 +47,12 @@ class RegisterController extends Controller
             'password' => Hash::make($validatedData['password']),
         ]);
 
-        return data([
-            'userData' => $user,
-            'userAbilities' => 'admin',
-            'accessToken' => $user->createToken('login')
-        ]);
+        return response()->json([
+            'data' => [
+                'userData' => $user,
+                'userAbilities' => 'admin',
+                'accessToken' => $user->createToken('login')
+            ],
+        ], 200);
     }
 }

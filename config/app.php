@@ -196,6 +196,7 @@ return [
         App\Providers\RestifyServiceProvider::class,
         App\Providers\RestifyServiceProvider::class,
         App\Providers\RestifyServiceProvider::class,
+        App\Providers\RestifyServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],

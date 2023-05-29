@@ -37,3 +37,6 @@ Route::post('resetPassword', \App\Http\Controllers\Restify\Auth\ResetPasswordCon
     ->middleware('throttle:6,1')
     ->name('restify.resetPassword');
 
+Route::get('user', \App\Http\Controllers\Restify\Auth\UserController::class)
+    ->middleware('auth:sanctum')
+    ->name('restify.user');
