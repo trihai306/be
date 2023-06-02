@@ -4,6 +4,7 @@ namespace App\Restify;
 
 use App\Models\User;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository extends Repository
 {
@@ -28,10 +29,19 @@ class UserRepository extends Repository
                 'required' => 'This field is required.',
             ]),
             field('phone'),
-            field('password')->storingRules('required')->canSee(function () {
-                return false;
-            }),
-            field('created_at')->storingRules('required'),
+            field('roles')->rules('required'),
+            field('password')->storingRules('required')->
+            storeCallback(function () use ($request) {
+                return Hash::make($request->input('password'));
+            })
+                ->updateCallback(function () use ($request) {
+                    return Hash::make($request->input('password'));
+                })
+                ->canSee(function () {
+                    return false;
+                }),
+            field('created_at'),
+            field('email_verified_at'),
         ];
     }
 }
