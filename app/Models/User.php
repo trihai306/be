@@ -7,12 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use HasRoles;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,14 +20,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'first_name',
-        'last_name',
         'phone',
         'address',
-        'state',
-        'country',
         'avatar',
-        'points',
+        'money',
+        'gender',
+        'birthday',
         'password',
     ];
 
@@ -50,14 +47,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function accountfb()
+
+    public function posts()
     {
-        return $this->hasMany(AccountFB::class);
+        return $this->hasMany(Post::class);
     }
-    public function proxy()
+    public function reviews()
     {
-        return $this->hasMany(Proxy::class);
+        return $this->hasMany(Review::class);
     }
 
+    public function getAvatarAttribute($value)
+    {
+        if($value) {
+            return env('APP_URL') . '/' . $value;
+        } else {
+            return env('APP_URL') . '/images/avatar.jpg';
+        }
+    }
 
 }
