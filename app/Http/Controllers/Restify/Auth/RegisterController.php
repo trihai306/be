@@ -27,23 +27,16 @@ class RegisterController extends Controller
             'email' => ['required', 'email', 'max:255', 'unique:' . Config::get('restify.auth.table', 'users')],
             'password' => ['required'],
             'name' => ['required'],
-            'first_name' => ['nullable'],
-            'last_name' => ['nullable'],
+
             'phone' => ['nullable'],
             'address' => ['nullable'],
-            'state' => ['nullable'],
-            'country' => ['nullable'],
         ], $messages);
 
         $user = User::forceCreate([
             'name' => $validatedData['name'],
-            'first_name' => $validatedData['first_name'] ?? null,
-            'last_name' => $validatedData['last_name'] ?? null,
             'email' => $validatedData['email'],
             'phone' => $validatedData['phone'] ?? null,
             'address' => $validatedData['address'] ?? null,
-            'state' => $validatedData['state'] ?? null,
-            'country' => $validatedData['country'] ?? null,
             'password' => Hash::make($validatedData['password']),
         ]);
 

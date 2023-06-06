@@ -26,8 +26,4 @@ class Review extends Model
     /**
      * Get the order associated with the review.
      */
-    public function order()
-    {
-        return $this->belongsTo(Order::class);
-    }
 }
