@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\AccountFB;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AccountFBPolicy
+class ReviewPolicy
 {
     use HandlesAuthorization;
 
@@ -15,7 +15,7 @@ class AccountFBPolicy
         return true;
     }
 
-    public function show(User $user = null, AccountFB $model): bool
+    public function show(User $user = null, Review $model): bool
     {
         return true;
     }
@@ -30,22 +30,22 @@ class AccountFBPolicy
         return false;
     }
 
-    public function update(User $user, AccountFB $model): bool
+    public function update(User $user, Review $model): bool
     {
         return false;
     }
 
-    public function updateBulk(User $user, AccountFB $model): bool
+    public function updateBulk(User $user, Review $model): bool
     {
         return false;
     }
 
-    public function deleteBulk(User $user, AccountFB $model): bool
+    public function deleteBulk(User $user, Review $model): bool
     {
         return false;
     }
 
-    public function delete(User $user, AccountFB $model): bool
+    public function delete(User $user, Review $model): bool
     {
         return false;
     }

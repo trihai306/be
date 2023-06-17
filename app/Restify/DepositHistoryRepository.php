@@ -41,15 +41,14 @@ class DepositHistoryRepository extends Repository
         'status',
     ];
 
-    public static array $actions = [
-        'user_id',
-        'amount',
-        'transaction_date',
-        'note',
-        'approved_by',
-        'status',
+    public static array $match = [
+     'user_id'=>'integer',
+        'amount'=>'integer',
+        'transaction_date'=>'date',
+        'note'=>'string',
+        'approved_by'=>'integer',
+        'status'=>'string',
     ];
-
     public function fields(RestifyRequest $request): array
     {
         return [

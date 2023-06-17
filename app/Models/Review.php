@@ -8,7 +8,7 @@ class Review extends Model
 {
     protected $fillable = [
         'user_id',
-        'order_id',
+        'post_id',
         'star',
         'content',
         'image',
@@ -24,6 +24,10 @@ class Review extends Model
     }
 
     /**
-     * Get the order associated with the review.
+     * Get the post associated with the review.
      */
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }
