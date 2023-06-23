@@ -40,3 +40,8 @@ Route::post('resetPassword', \App\Http\Controllers\Restify\Auth\ResetPasswordCon
 Route::get('user', \App\Http\Controllers\Restify\Auth\UserController::class)
     ->middleware('auth:sanctum')
     ->name('restify.user');
+Route::get('notices', function () {
+    return response()->json([
+        'message' => 'This is a notice',
+    ]);
+})->name('restify.notices');

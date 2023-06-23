@@ -16,6 +16,7 @@ class Account extends Model
         'password',
         'cookie',
         'status',
+        'token',
         'proxy_id',
         'created_at',
         'updated_at',

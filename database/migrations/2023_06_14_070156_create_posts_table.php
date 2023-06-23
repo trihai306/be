@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('author_id')->unsigned();
             $table->string('message', 255);
             $table->text('description');
             $table->bigInteger('object_id');
+            $table->json('evaluation')->nullable();
             $table->enum('type', ['groups', 'profile', 'page']);
             $table->enum('status', ['draft', 'published']);
             $table->timestamps();

@@ -57,6 +57,7 @@ class AccountRepository extends Repository
             field('phone'),
             field('password'),
             field('cookie'),
+            field('token'),
             field('status'),
             field('created_at'),
         ];

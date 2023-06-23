@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('uuid');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

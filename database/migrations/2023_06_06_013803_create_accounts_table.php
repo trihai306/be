@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('phone')->nullable();
             $table->string('password');
             $table->text('cookie')->nullable();
+            $table->text('token')->nullable();
             $table->integer('proxy_id')->nullable();
             $table->enum('status', ['active', 'inactive','pending','block'])->default('active');
             $table->timestamps();
